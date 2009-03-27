@@ -1,0 +1,10 @@
+#!/bin/sh
+
+cd ~/config/add-ons
+
+if test -e screen_savers; then
+	rm Screen\ Savers/DuckSaver
+	rmdir Screen\ Savers
+	ln -s screen_savers Screen\ Savers
+	rm Screen\ Savers/screen_savers
+fi

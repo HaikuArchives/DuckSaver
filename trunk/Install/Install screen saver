@@ -1,0 +1,4 @@
+#!/bin/sh
+
+mv ~/~DuckSaver ~/config/add-ons/Screen\ Savers/DuckSaver
+
