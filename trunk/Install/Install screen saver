@@ -1,4 +1,10 @@
 #!/bin/sh
 
-mv ~/~DuckSaver ~/config/add-ons/Screen\ Savers/DuckSaver
+USER_DIRECTORY=$(/bin/finddir B_USER_DIRECTORY)
+if /bin/finddir B_SYSTEM_NONPACKAGED_DIRECTORY 2> /dev/null; then
+	USER_ADDONS_DIRECTORY=$(/bin/finddir B_USER_NONPACKAGED_ADDONS_DIRECTORY)
+else
+	USER_ADDONS_DIRECTORY=$(/bin/finddir B_USER_ADDONS_DIRECTORY)
+fi
 
+/bin/mv $USER_DIRECTORY/~DuckSaver $USER_ADDONS_DIRECTORY/Screen\ Savers/DuckSaver 2> /dev/null
