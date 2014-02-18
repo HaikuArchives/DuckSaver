@@ -27,12 +27,6 @@
 
 #define APP_SIGNATURE		"application/x-vnd.pecora-ducksaver"
 
-#define APP_PATH			"/boot/home/config/add-ons/Screen Savers/DuckSaver"
-
-#if __INTEL__
-#define APP_PATH_DANO		"/boot/home/config/add-ons/screen_savers/DuckSaver"
-#endif
-
 #define	MAX_COUNT_RESOURCES	2
 #define SPEED				300000 // Higher = slower!
 
@@ -74,27 +68,10 @@ DuckSaver::DuckSaver(BMessage *message, image_id image)
 
 	BMimeType	mime( APP_SIGNATURE );
 	entry_ref	app_ref;
-	
-	BFile file;
-	file.SetTo(APP_PATH, B_READ_WRITE);
-	
-#if __INTEL__
-	// Not found? Are we running on DanO?
-	if (file.InitCheck()!=B_OK)
-		file.SetTo(APP_PATH_DANO, B_READ_WRITE);
-#endif
-
-	if (file.InitCheck()!=B_OK) {
-#ifdef DEBUG
-		cerr << "Cannot find resource file: " << strerror(file.InitCheck()) << endl;
-#endif
-		return;
-	}
-
-	BResources	resources( &file );
+	BResources	resources;
 
 	status_t err;
-	if ( (err = resources.SetTo(&file)) != B_OK) {
+	if ( (err = resources.SetToImage((const void*)&instantiate_screen_saver)) != B_OK) {
 #ifdef DEBUG
 		cerr << "Unable to open resource file." << endl;
 #endif
